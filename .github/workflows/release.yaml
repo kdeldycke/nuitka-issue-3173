@@ -8,7 +8,14 @@ jobs:
 
   nuitka-issue-3173:
     name: "Nuitka: test for #3173"
-    runs-on: windows-2022
+    strategy:
+      matrix:
+        os:
+          - "ubuntu-24.04"
+          - "macos-15"  # arm64
+          - "macos-13"  # x86-64
+          - "windows-2022"
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/setup-python@v5.3.0
         with:
@@ -24,9 +31,9 @@ jobs:
         continue-on-error: true
         run: |
           uv run
-      - name: Nuitka --version - Working case
+      - name: Nuitka found (working case)
         run: |
           uv --no-progress run --frozen -- python -m nuitka --version
-      - name: Nuitka --version - Broken case
+      - name: Nuitka not found (broken case)
         run: |
           uv --no-progress run --frozen -- nuitka --version
