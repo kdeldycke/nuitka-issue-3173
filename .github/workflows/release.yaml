@@ -16,6 +16,7 @@ jobs:
           - "macos-13"  # x86-64
           - "windows-2022"
     runs-on: ${{ matrix.os }}
+    continue-on-error: true
     steps:
       - uses: actions/setup-python@v5.3.0
         with:
