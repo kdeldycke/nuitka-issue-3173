@@ -27,7 +27,7 @@ jobs:
       - name: Install Nuitka
         run: |
           uv --no-progress venv
-          uv --no-progress pip install "nuitka == 2.4.11" "ordered-set == 4.1.0" "zstandard == 0.23.0"
+          uv --no-progress pip install "nuitka == 2.4.11"
       - name: List uv CLIs
         continue-on-error: true
         run: |
