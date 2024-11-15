@@ -36,6 +36,7 @@ jobs:
         run: |
           uv --no-progress run --frozen -- python -m nuitka --version
       - name: uv run nuitka - Broken on Windows
+        if: runner.os != 'Windows'
         run: |
           uv --no-progress run --frozen -- nuitka --version
       - name: uv run nuitka.cmd - Only works on Windows
