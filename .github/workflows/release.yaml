@@ -33,9 +33,13 @@ jobs:
         run: |
           uv run
 
-      - name: uv run python -m nuitka - Works on all platforms
+      - name: uv run python --module nuitka - Works on all platforms
         run: |
-          uv --no-progress run --frozen -- python -m nuitka --version
+          uv --no-progress run --frozen -- python --module nuitka --version
+
+      - name: uv run --module nuitka
+        run: |
+          uv --no-progress run --frozen --module -- nuitka --version
 
       - name: uv run nuitka - Broken on Windows
         if: runner.os != 'Windows'
@@ -45,7 +49,3 @@ jobs:
       - name: uv run nuitka.cmd - Only works on Windows
         run: |
           uv --no-progress run --frozen -- nuitka.cmd --version
-
-      - name: uv run --module nuitka
-        run: |
-          uv --no-progress run --frozen --module -- nuitka --version
