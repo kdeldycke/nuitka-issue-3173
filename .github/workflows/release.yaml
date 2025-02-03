@@ -32,13 +32,20 @@ jobs:
         continue-on-error: true
         run: |
           uv run
+
       - name: uv run python -m nuitka - Works on all platforms
         run: |
           uv --no-progress run --frozen -- python -m nuitka --version
+
       - name: uv run nuitka - Broken on Windows
         if: runner.os != 'Windows'
         run: |
           uv --no-progress run --frozen -- nuitka --version
+
       - name: uv run nuitka.cmd - Only works on Windows
         run: |
           uv --no-progress run --frozen -- nuitka.cmd --version
+
+      - name: uv run --module nuitka
+        run: |
+          uv --no-progress run --frozen --module -- nuitka --version
